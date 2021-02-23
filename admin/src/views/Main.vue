@@ -1,14 +1,15 @@
 <template>
     
 <el-container style="height: 100vh">
-  <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu router :default-openeds="['1']" unique-opened :default-active="$route.path"><!--加上路由跳转,默认打开，只打开一个，高亮-->
+  <el-aside width="200px" style="background-color:  rgb(34, 33, 33)">
+    <el-menu router :default-openeds="['1']" unique-opened :default-active="$route.path" 
+    text-color="#fff"><!--加上路由跳转,默认打开，只打开一个，高亮-->
       <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>内容管理</template>
+        <template slot="title" ><i class="el-icon-message"></i>内容管理</template>
         <el-menu-item-group>
           <template slot="title">文章</template>
           <el-menu-item index="/articles/create">新建文章</el-menu-item><!--index中是跳转的组件-->
-          <el-menu-item index="/articles/list">文章列表</el-menu-item>
+          <el-menu-item index="/articles/list" >文章列表</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
             <template slot="title">我的文章</template>
@@ -43,7 +44,8 @@
       <el-submenu index="4">
         <template slot="title"><i class="el-icon-message"></i>用户管理</template>
         <el-menu-item-group>
-          <template slot="title">vip用户</template>
+          <template slot="title">用户</template>
+          <el-menu-item index="/user/edit">用户列表</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
             <template slot="title">评论管理</template>
@@ -55,7 +57,10 @@
   
   <el-container>
     <el-header style="text-align: right; font-size: 12px">
-      
+        <el-row type="flex" class="row-bg" justify="space-between">   
+            <el-col :span="4" class="header-font">后台系统管理</el-col>
+            <el-col :span="1" class="header-logout"><a href="#" @click.prevent="logout" >退出</a></el-col>
+      </el-row>
     </el-header>
     
     <el-main>
@@ -76,13 +81,17 @@
 
 <style>
   .el-header {
-    background-color: #B3C0D1;
+    box-shadow: inset 0 0 1000px
+    rgba(255, 255, 255, 0.25) ;
     color: #333;
     line-height: 60px;
   }
   
   .el-aside {
     color: #333;
+  }
+  .el-main{
+    background-color: #F2F6FC
   }
 </style>
 
@@ -97,6 +106,12 @@
       return {
         tableData: Array(20).fill(item)
       }
-    }
+    },
+    methods: {
+      logout(){
+        localStorage.clear()
+        this.$router.push('/login')
+      }
+    },
   };
 </script>

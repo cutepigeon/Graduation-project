@@ -4,6 +4,7 @@ import './plugins/element.js'
 import http from './http'
 import router from './router'
 import './style.css'
+import './assets/scss/style.scss'
 Vue.mixin({
   computed:{
     uploadUrl(){

@@ -5,11 +5,13 @@
         <el-form @submit.native.prevent="login" >
             <!--表单 -->
             <el-form-item label="用户名:">
-                <el-input v-model='model.username'></el-input>
+                <el-input v-model='model.username'  name="username" v-validate="'required|min:3'" placeholder="请输入"></el-input>
             </el-form-item>
+            <p>{{errorBags.first('username')}}</p>
             <el-form-item label="密码:">
-                <el-input type="password" v-model='model.password'></el-input>
+                <el-input type="password" name="password" v-validate="'required'" v-model='model.password'></el-input>
             </el-form-item>
+            <p>{{errorBags.first('password')}}</p>
             <el-form-item class="d-flex" label="验证码" >
                 <el-input  v-model='localCaptcha' style="width: 50%; " :suffix-icon="changeIcon()" ></el-input>
             </el-form-item>

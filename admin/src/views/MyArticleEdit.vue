@@ -12,7 +12,10 @@
       <el-form-item label="标题">
         <el-input v-model="model.title"></el-input>
       </el-form-item>
-      
+      <el-form-item label="关键字">
+        <el-input v-model="model.keyword"></el-input>
+      </el-form-item>
+
       <el-form-item label="详情">
         <vue-editor useCustomImageHandler @image-added="handleImageAdded" v-model="model.body"></vue-editor>
       </el-form-item>

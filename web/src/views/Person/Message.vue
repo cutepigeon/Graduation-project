@@ -71,7 +71,7 @@
     },
     methods: {
       exist(){
-        if(this.avatar==''){
+        if(this.avatar==''||!('avatar' in this.model)){
           return false
         }else{
           return true

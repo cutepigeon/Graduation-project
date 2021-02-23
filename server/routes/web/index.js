@@ -90,11 +90,11 @@ const web = app => {
                 }
             }
         ])
-        const subCats = cats.map(v => v._id)
+        const subCats = cats.map(v => v._id)//获取分类的id
         cats.unshift({
             name: '综合',
             newsList: await Article.find().where({
-                categories: { $in: subCats }
+                categories: { $in: subCats }  //查询全部分类文档（对应上面id）
             }).populate('categories').limit(5).lean()//categories关联查询Category里的数据
         })
         cats.map(cat => {
@@ -165,7 +165,8 @@ const web = app => {
      //用户信息创建
      router.post('/person/create/:id',async(req,res)=>{
          const  modelUser={
-             user:req.params.id
+             user:req.params.id,
+             allow:true
          }
          const user=req.params.id
         const model = await UserMessage.findOne({
@@ -191,7 +192,9 @@ const web = app => {
         if(!model){
        await  Collection.create(modelUser)
         }else{
+            //当前收藏加上原本收藏
                    req.body.article_body.push(...model.article_body)
+                   //去重
                const articleArr=Array.from(new Set(req.body.article_body))         
                console.log( articleArr)
                const articleModel={
@@ -236,6 +239,7 @@ const web = app => {
      //vip登录
     app.post('/web/api/vip/login', async (req, res) => {
         const { username, password } = req.body//解构赋值
+        
         //通过用户名找用户
         const user = await User.findOne({ username }).select('+password')//模型设置了不取出password，所以这里得写select+
         assert(user, 422, '用户不存在')
@@ -273,7 +277,7 @@ const web = app => {
     app.post('/web/api/upload', upload.single('file'), async (req, res) => {//upload.single接收前端参数
         const file = req.file//运用中间件，将file添加到req上
         //修改url地址为域名让别人也可以访问
-        file.url = `http://www.snow-sakura.com/uploads/webupload/${file.filename}`
+        file.url = `http://localhost:3000/uploads/webupload/${file.filename}`
         res.send(file)
     })
 

@@ -14,6 +14,8 @@ import AdminUserEdit from '../views/AdminUserEdit.vue'
 import AdminUserList from '../views/AdminUserList.vue'
 import IndexArticleEdit from '../views/IndexArticleEdit.vue'
 import IndexArticleList from '../views/IndexArticleList.vue'
+//引入用户界面
+import UserList from '../views/UserList.vue'
 import CommentList from '../views/CommentList.vue'
 import CommentManage from '../views/CommentManage.vue'
 Vue.use(VueRouter)
@@ -62,7 +64,8 @@ const routes = [
 },
 
 //用户管理
-//1.vip
+//1.用户列表
+{path:'/user/edit',component:UserList},
 //2.评论管理
 {  path:'/article/comment',component:CommentList
 },

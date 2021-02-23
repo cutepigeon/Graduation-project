@@ -19,7 +19,17 @@ import './assets/scss/LOL/homeStyle.scss'
 //我的文章样式
 import  './assets/scss/myArticleStyle/myArticleStyle.scss'
 //引入表单校验
+import VeeValidate,{Validator}from 'vee-validate';
+import zh from 'vee-validate/dist/locale/zh_CN'
+import  './local/index'
+const config = {
+    errorBagName: 'errorBags', // change if property conflicts.
+    fieldsBagName: 'fieldBags',
+    local:'zh_CN',
 
+};
+Vue.use(VeeValidate, config)
+Validator.localize('zh_CN',zh)
 //首页样式
 import './assets/scss/indexStyle/mainStyle.scss'
 //个人信息样式
